@@ -19,6 +19,8 @@ public partial class UserScaffoldV2Context : DbContext
 
     public virtual DbSet<MstUser> MstUsers { get; set; }
 
+    public DbSet<MstOffice> MstOffice { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("Name=ConnectionStrings:DefaultConnection");
 
@@ -63,6 +65,12 @@ public partial class UserScaffoldV2Context : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("user_name");
         });
+
+        modelBuilder.Entity<MstOffice>().HasData(
+                new MstOffice { Id = 1, NameDeptHead = "Latief", Alamat = "Jogja" },
+                new MstOffice { Id = 2, NameDeptHead = "Irfan", Alamat = "Monjali" },
+                new MstOffice { Id = 3, NameDeptHead = "Sya", Alamat = "Doc" }
+        );
 
         OnModelCreatingPartial(modelBuilder);
     }
